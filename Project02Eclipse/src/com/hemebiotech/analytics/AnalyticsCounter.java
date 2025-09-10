@@ -3,6 +3,7 @@ package com.hemebiotech.analytics;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.List;
 
 public class AnalyticsCounter {
 	private static int headacheCount = 0;
@@ -11,34 +12,26 @@ public class AnalyticsCounter {
 
 	/**
 	 * Analyse and count how many time a symptom in this list {'headache', 'rash', 'dialated pupils'} is in symptom.txt file.
-	 * The result is write in result.out
+	 * The result is write in the fileName in parameters (resultsOfDay.out)
 	 * @author Philippe & Axel
 	 * @param args
-	 * @throws Exception
 	 */
 	public static void main(String args[]) throws Exception {
-		// take text file with symptoms and affect first line to String line
-		BufferedReader reader = new BufferedReader (new FileReader("../symptoms.txt"));
-		String line = reader.readLine();
 
-		while (line != null) {
-			if (line.equals("headache")) {
-				headacheCount++;
-			}
-			else if (line.equals("rash")) {
-				rashCount++;
-			}
-			else if (line.equals("dialated pupils")) {
-				pupilCount++;
-			}
-			line = reader.readLine();	// get another line in text
+
+		ReadSymptomDataFromFile file = new ReadSymptomDataFromFile("symptoms.txt");
+		List<String> symptomList = file.GetSymptoms();
+		ListSymptomsByName listeOrdonnee = new ListSymptomsByName();
+
+		for(int i=0; i<symptomList.size(); i++){
+			Symptom symptom = new Symptom(symptomList.get(i));
+			System.out.println(symptom.getName());
+			listeOrdonnee.addSymptom(symptom);
 		}
-		
-		// next generate output
-		FileWriter writer = new FileWriter ("result.out");
-		writer.write("headache: " + headacheCount + "\n");
-		writer.write("rash: " + rashCount + "\n");
-		writer.write("dialated pupils: " + pupilCount + "\n");
-		writer.close();
+
+		WriteSymptomDataToFile output = new WriteSymptomDataToFile();
+
+		output.WriteSymptoms(listeOrdonnee, "resultsOfDay.out");
+
 	}
 }
