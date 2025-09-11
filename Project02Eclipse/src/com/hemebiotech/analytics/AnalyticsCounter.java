@@ -1,37 +1,30 @@
 package com.hemebiotech.analytics;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.util.List;
 
 public class AnalyticsCounter {
-	private static int headacheCount = 0;
-	private static int rashCount = 0;
-	private static int pupilCount = 0;
 
+	String inputFile = "";
+	String outputFile = "";
+
+	public AnalyticsCounter(String inputFile, String outpuFile){
+		this.inputFile = inputFile;
+		this.outputFile = outpuFile;
+	}
 	/**
 	 * Analyse and count how many time a symptom in this list {'headache', 'rash', 'dialated pupils'} is in symptom.txt file.
-	 * The result is write in the fileName in parameters (resultsOfDay.out)
+	 * The result is write in the fileName in parameters.
 	 * @author Philippe & Axel
-	 * @param args
 	 */
-	public static void main(String args[]) throws Exception {
+	public void analyseData() {
 
-
-		ReadSymptomDataFromFile file = new ReadSymptomDataFromFile("symptoms.txt");
+		ReadSymptomDataFromFile file = new ReadSymptomDataFromFile(inputFile);
 		List<String> symptomList = file.GetSymptoms();
-		ListSymptomsByName listeOrdonnee = new ListSymptomsByName();
 
-		for(int i=0; i<symptomList.size(); i++){
-			Symptom symptom = new Symptom(symptomList.get(i));
-			System.out.println(symptom.getName());
-			listeOrdonnee.addSymptom(symptom);
-		}
+		ListSymptomsByName listeOrdonnee = new ListSymptomsByName();
+		listeOrdonnee.addSymptomsList(symptomList);
 
 		WriteSymptomDataToFile output = new WriteSymptomDataToFile();
-
-		output.WriteSymptoms(listeOrdonnee, "resultsOfDay.out");
-
+		output.WriteSymptoms(listeOrdonnee, outputFile);
 	}
 }
