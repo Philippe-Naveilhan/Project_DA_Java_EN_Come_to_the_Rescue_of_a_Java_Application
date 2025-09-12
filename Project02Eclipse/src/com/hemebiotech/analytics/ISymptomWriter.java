@@ -13,5 +13,5 @@ public interface ISymptomWriter {
      * If all data are done, we have to do the job, and return a message.
      */
 
-    void WriteSymptoms(ListSymptomsByName listSymptomsByName, String nameFile);
+    void WriteSymptoms(ListSymptomsByName listSymptomsByName, String nameFile) throws Exception;
 }

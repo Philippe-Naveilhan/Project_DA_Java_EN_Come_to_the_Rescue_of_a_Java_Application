@@ -3,6 +3,9 @@ package com.hemebiotech.analytics;
 import java.util.List;
 import java.util.TreeMap;
 
+/**
+ * Transform List in input in a collection TreeMap, with symptome's name for the key, and the number of it in value.
+ */
 public class ListSymptomsByName {
     public TreeMap<String, Integer> listSymptomsByName = new TreeMap<>();
 

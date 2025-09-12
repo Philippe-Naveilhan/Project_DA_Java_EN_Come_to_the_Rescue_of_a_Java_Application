@@ -1,24 +1,25 @@
 package com.hemebiotech.analytics;
 
 import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Map;
 
+/**
+ * Take the collection and write in {outputFile} the result with this format :
+ *  {symptom1} : {quantity}
+ *  {symptom2} : {quantity}
+ *  {symptom3} : {quantity}
+ *
+ */
 public class WriteSymptomDataToFile implements ISymptomWriter {
 
     @Override
-    public void WriteSymptoms(ListSymptomsByName listSymptomsByName, String nameFile) {
+    public void WriteSymptoms(ListSymptomsByName listSymptomsByName, String nameFile) throws Exception {
 
         if (listSymptomsByName != null) {
-            try {
-                FileWriter writer = new FileWriter(nameFile);
-                for (String symptom : listSymptomsByName.listSymptomsByName.keySet()) {
-                    writer.write("*" + listSymptomsByName.listSymptomsByName.get(symptom) + "\t" + symptom + "\n");
-                }
-                writer.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+            FileWriter writer = new FileWriter(nameFile);
+            for (String symptom : listSymptomsByName.listSymptomsByName.keySet()) {
+                writer.write(listSymptomsByName.listSymptomsByName.get(symptom) + " :\t" + symptom + "\n");
             }
+            writer.close();
         }
     }
 }

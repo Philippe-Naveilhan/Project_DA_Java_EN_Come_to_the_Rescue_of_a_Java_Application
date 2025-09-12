@@ -12,19 +12,32 @@ public class AnalyticsCounter {
 		this.outputFile = outpuFile;
 	}
 	/**
-	 * Analyse and count how many time a symptom in this list {'headache', 'rash', 'dialated pupils'} is in symptom.txt file.
-	 * The result is write in the fileName in parameters.
+	 * Analyse and count how many time a symptom is in this list in {inputFile}.
+	 * The result is written in the {outpuFile}.
 	 * @author Philippe & Axel
 	 */
 	public void analyseData() {
 
-		ReadSymptomDataFromFile file = new ReadSymptomDataFromFile(inputFile);
-		List<String> symptomList = file.GetSymptoms();
-
-		ListSymptomsByName listeOrdonnee = new ListSymptomsByName();
-		listeOrdonnee.addSymptomsList(symptomList);
-
-		WriteSymptomDataToFile output = new WriteSymptomDataToFile();
-		output.WriteSymptoms(listeOrdonnee, outputFile);
+		try {
+			ReadSymptomDataFromFile file = new ReadSymptomDataFromFile(inputFile);
+			List<String> symptomList = file.GetSymptoms();
+			try {
+				ListSymptomsByName listeOrdonnee = new ListSymptomsByName();
+				listeOrdonnee.addSymptomsList(symptomList);
+				try {
+					WriteSymptomDataToFile output = new WriteSymptomDataToFile();
+					output.WriteSymptoms(listeOrdonnee, outputFile);
+				} catch (Exception e) {
+					System.out.println("//------> Erreur dans l'écriture du fichier de sortie.");
+					e.printStackTrace();
+				}
+			} catch (Exception e) {
+				System.out.println("//------> Erreur dans le traitement des données du fichier.");
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			System.out.println("//------> Erreur dans la tentative d'accès au fichier.");
+			e.printStackTrace();
+		}
 	}
 }
