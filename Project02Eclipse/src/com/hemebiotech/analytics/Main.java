@@ -3,10 +3,17 @@ package com.hemebiotech.analytics;
 public class Main {
 
     public static void main(String[] args){
-        AnalyticsCounter analyse = new AnalyticsCounter("symptoms.txt", "symptoms.out");
-        analyse.analyseData();
+        String inputFile = "symptoms.txt";
+        try {
+            ReadSymptomDataFromFile fileToRead = new ReadSymptomDataFromFile("symptoms.txt");
+            WriteSymptomDataToFile writeResults = new WriteSymptomDataToFile();
+            AnalyticsCounter analyse = new AnalyticsCounter(fileToRead, writeResults);
 
-        AnalyticsCounter analyse_pharma1_110925 = new AnalyticsCounter("symptoms_pharma1_110925.txt", "symptoms_pharma1_110925.out");
-        analyse_pharma1_110925.analyseData();
+            analyse.analyseData();
+
+        } catch(Exception e) {
+            System.out.println("Error(s) : \n\t" + e);
+        }
+
     }
 }

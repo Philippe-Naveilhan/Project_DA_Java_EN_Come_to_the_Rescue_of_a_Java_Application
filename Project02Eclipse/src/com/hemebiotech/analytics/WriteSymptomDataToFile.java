@@ -1,6 +1,7 @@
 package com.hemebiotech.analytics;
 
 import java.io.FileWriter;
+import java.util.Map;
 
 /**
  * Take the collection and write in {outputFile} the result with this format :
@@ -12,14 +13,21 @@ import java.io.FileWriter;
 public class WriteSymptomDataToFile implements ISymptomWriter {
 
     @Override
-    public void WriteSymptoms(ListSymptomsByName listSymptomsByName, String nameFile) throws Exception {
+    public void writeSymptoms(Map<String, Integer> symptoms) {
+        if (symptoms == null) {
+            throw new IllegalArgumentException("Enable to proccess array symptoms : " + symptoms);
+        }
 
-        if (listSymptomsByName != null) {
-            FileWriter writer = new FileWriter(nameFile);
-            for (String symptom : listSymptomsByName.listSymptomsByName.keySet()) {
-                writer.write(listSymptomsByName.listSymptomsByName.get(symptom) + " :\t" + symptom + "\n");
+        try{
+            FileWriter writer = new FileWriter("symptoms.out");
+            for (String symptom : symptoms.keySet()) {
+                writer.write(symptom + " : " + symptoms.get(symptom) + "\n");
             }
             writer.close();
+            System.out.println("Ecriture du fichier terminée.");
+        } catch (Exception e) {
+            System.out.println("Une erreur est survenue lors de l'écriture du fichier : " + e);
         }
     }
+
 }

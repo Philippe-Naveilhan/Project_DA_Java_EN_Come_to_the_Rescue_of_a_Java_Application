@@ -1,5 +1,7 @@
 package com.hemebiotech.analytics;
 
+import java.util.Map;
+
 /**
  * All sended for write in output file need to have at least 2 values :
  *     - The output filename
@@ -13,5 +15,5 @@ public interface ISymptomWriter {
      * If all data are done, we have to do the job, and return a message.
      */
 
-    void WriteSymptoms(ListSymptomsByName listSymptomsByName, String nameFile) throws Exception;
+    void writeSymptoms(Map<String, Integer> symptoms);
 }
