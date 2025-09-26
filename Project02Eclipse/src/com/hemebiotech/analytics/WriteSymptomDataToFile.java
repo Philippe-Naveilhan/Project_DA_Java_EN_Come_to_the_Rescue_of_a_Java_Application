@@ -5,10 +5,14 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * Take the collection and write in {outputFile} the result with this format :
+ * Take the collection (TreeMap) and write in result/symptoms.out the result with this format :
  *  {symptom1} : {quantity}
  *  {symptom2} : {quantity}
  *  {symptom3} : {quantity}
+ *
+ * @return void
+ * @exception IllegalArgumentException if symptom is null
+ * @exception IOException if impossibility to create file
  *
  */
 public class WriteSymptomDataToFile implements ISymptomWriter {

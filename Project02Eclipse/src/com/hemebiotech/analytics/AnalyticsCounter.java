@@ -16,7 +16,7 @@ public class AnalyticsCounter {
 
     /**
      * Analyse and count how many time a symptom is in this list in reader object.
-     * The result is sent to write object.
+     * The result is a Map sent to write object.
      *
      * @author Philippe & Axel
      */

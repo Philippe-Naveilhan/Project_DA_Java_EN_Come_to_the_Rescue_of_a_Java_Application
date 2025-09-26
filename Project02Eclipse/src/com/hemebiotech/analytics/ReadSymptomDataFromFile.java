@@ -20,13 +20,19 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
         this.filepath = filepath;
     }
 
+    /**
+     * @param fileName
+     * @return True only if the fileName ended by ".txt"
+     */
     public boolean isTxtFile(String fileName) {
         return fileName.endsWith(".txt");
     }
 
     /**
-     *
-     * @return a list of symptoms
+     * Read the txt file and put each line in an array
+     * @return a list of symptoms in an array
+     * @exception IllegalArgumentException if filepath is null or with another extension than .txt
+     * @exception IOException if there is impossibility to read the file
      */
     @Override
     public List<String> getSymptoms() throws IllegalArgumentException{
