@@ -32,7 +32,8 @@ public class AnalyticsCounter {
             System.out.println("Tri des données reçue après lecture : OK");
         } catch(Exception e) {
             throw new Exception("Une erreur est survenue lors de l'analyse des données : " + e);
+        } finally {
+            writer.writeSymptoms(symptomsMap);
         }
-        writer.writeSymptoms(symptomsMap);
     }
 }

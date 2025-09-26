@@ -8,10 +8,10 @@ package com.hemebiotech.analytics;
 public class Main {
 
     public static void main(String[] args) {
-        String inputFile = "symptoms.txt";
+
         try {
-            ReadSymptomDataFromFile reader = new ReadSymptomDataFromFile(inputFile);
-            WriteSymptomDataToFile writer = new WriteSymptomDataToFile();
+            ReadSymptomDataFromFile reader = new ReadSymptomDataFromFile("symptoms.txt");
+            WriteSymptomDataToFile writer = new WriteSymptomDataToFile("result/symptoms.out");
 
             AnalyticsCounter analyse = new AnalyticsCounter(reader, writer);
 
