@@ -6,8 +6,8 @@ import java.util.TreeMap;
 
 public class AnalyticsCounter {
 
-	private final ISymptomReader reader;
-	private final ISymptomWriter writer;
+    private final ISymptomReader reader;
+    private final ISymptomWriter writer;
 
     public AnalyticsCounter(ISymptomReader reader, ISymptomWriter writer) {
         this.reader = reader;
@@ -15,18 +15,24 @@ public class AnalyticsCounter {
     }
 
     /**
-	 * Analyse and count how many time a symptom is in this list in {inputFile}.
-	 * The result is written in the {outputFile}.
-	 * @author Philippe & Axel
-	 */
-	public void analyseData() {
+     * Analyse and count how many time a symptom is in this list in reader object.
+     * The result is sent to write object.
+     *
+     * @author Philippe & Axel
+     */
+    public void analyseData() throws Exception {
 
-		List<String> symptoms = reader.getSymptoms();
-		Map<String, Integer> symptomsMap = new TreeMap<>();
-		for(String symptom : symptoms) {
-			symptomsMap.put(symptom, symptomsMap.getOrDefault(symptom,0) + 1);
-		}
+        List<String> symptoms = reader.getSymptoms();
+        Map<String, Integer> symptomsMap = new TreeMap<>();
+        try {
+            for (String symptom : symptoms) {
+                symptomsMap.put(symptom, symptomsMap.getOrDefault(symptom, 0) + 1);
+            }
 
-		writer.writeSymptoms(symptomsMap);
-	}
+            System.out.println("Tri des données reçue après lecture : OK");
+        } catch(Exception e) {
+            throw new Exception("Une erreur est survenue lors de l'analyse des données : " + e);
+        }
+        writer.writeSymptoms(symptomsMap);
+    }
 }

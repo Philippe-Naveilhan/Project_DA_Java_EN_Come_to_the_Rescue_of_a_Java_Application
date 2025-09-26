@@ -29,7 +29,7 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
      * @return a list of symptoms
      */
     @Override
-    public List<String> getSymptoms() {
+    public List<String> getSymptoms() throws IllegalArgumentException{
         if (filepath == null || !isTxtFile(filepath)) {
             throw new IllegalArgumentException("Impossible de lire le fichier ou l'extension est différente de .txt : " + filepath);
         }
@@ -42,7 +42,7 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
                 result.add(line);
                 line = reader.readLine();
             }
-            System.out.println("Lecture du fichier terminée.");
+            System.out.println("Lecture du fichier : OK");
             return result;
         } catch (IOException e) {
             throw new RuntimeException("Une erreur s'est produite à la lecture du fichier : " + e);

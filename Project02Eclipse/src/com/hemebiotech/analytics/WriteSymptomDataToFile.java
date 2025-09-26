@@ -1,6 +1,7 @@
 package com.hemebiotech.analytics;
 
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -13,21 +14,20 @@ import java.util.Map;
 public class WriteSymptomDataToFile implements ISymptomWriter {
 
     @Override
-    public void writeSymptoms(Map<String, Integer> symptoms) {
+    public void writeSymptoms(Map<String, Integer> symptoms) throws IllegalArgumentException, IOException {
         if (symptoms == null) {
             throw new IllegalArgumentException("Enable to proccess array symptoms : " + symptoms);
         }
 
         try{
-            FileWriter writer = new FileWriter("symptoms.out");
+            FileWriter writer = new FileWriter("result/symptoms.out");
             for (String symptom : symptoms.keySet()) {
                 writer.write(symptom + " : " + symptoms.get(symptom) + "\n");
             }
             writer.close();
-            System.out.println("Ecriture du fichier terminée.");
-        } catch (Exception e) {
-            System.out.println("Une erreur est survenue lors de l'écriture du fichier : " + e);
+            System.out.println("Ecriture du fichier : OK");
+        } catch (IOException e) {
+            throw new IOException("Une erreur est survenue lors de l'écriture du fichier : " + e);
         }
     }
-
 }
