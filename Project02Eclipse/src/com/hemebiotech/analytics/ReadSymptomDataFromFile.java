@@ -14,25 +14,27 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
     private final String filepath;
 
     /**
-     * @param filepath a full or partial path to file with symptom strings in it, one per line
+     * Prend le nom du fichier source
+     * @param filepath chemin/fichier contenant les symptômes lligne par ligne
      */
     public ReadSymptomDataFromFile(String filepath) {
         this.filepath = filepath;
     }
 
     /**
-     * @param fileName
-     * @return True only if the fileName ended by ".txt"
+     * Vérifie l'extension du fichier
+     * @param fileName Nom du fichier entrant
+     * @return True si l'extension du fichier est ".txt"
      */
     public boolean isTxtFile(String fileName) {
         return fileName.endsWith(".txt");
     }
 
     /**
-     * Read the txt file and put each line in an array
-     * @return a list of symptoms in an array
-     * @exception IllegalArgumentException if filepath is null or with another extension than .txt
-     * @exception IOException if there is impossibility to read the file
+     * Lit le fichier texte et met chaque ligne dans une List
+     * @return une liste des symptômes dans une List
+     * @exception IllegalArgumentException si le fichier est {@code null} ou avec une extension autre que .txt
+     * @exception RuntimeException s'il est impossible de lire le fichier.
      */
     @Override
     public List<String> getSymptoms() throws IllegalArgumentException{

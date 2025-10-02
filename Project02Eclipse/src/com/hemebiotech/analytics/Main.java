@@ -1,12 +1,19 @@
 package com.hemebiotech.analytics;
 
 /**
- * Program for analysis of symtoms.
- * It take a txt file with a list of symtoms, count each symptom, sort its alphabetical order and put result in an outfile.
+ * Programme pour l'analyse de liste de symptômes.
+ * Prend en entrée un fichier texte (.txt), compte chaque symptôme, les trie par ordre alphabétique et écrit les résultat dans un fichier de sortie.
+ *
+ * @author Alex et Philippe
  *
  */
 public class Main {
 
+    /**
+     * Main qui édite les exceptions lancées par les différentes classes appelées
+     * @param args Pas d'arguments
+     *
+     */
     public static void main(String[] args) {
 
         try {

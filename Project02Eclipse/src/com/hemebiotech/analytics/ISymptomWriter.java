@@ -4,16 +4,18 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * All sended for write in output file need to have at least 2 values :
- *     - The output filename
- *     - A TreeMap of symptoms and quantity of each.    
+ * Tout est reçu afin d'écrire dans le fichier de sortie. Il est nécessaire d'avoir 2 valeurs :
+ *     - Le nom du fichier de sortie (Au moment de l'instantiation de l'objet)
+ *     - Un {@code treeMap} des symptomes et de la quantité de chaque envoyé à {@code writeSymptoms} en param.
  *     
  */
 
 public interface ISymptomWriter {
     /**
-     * If no all data needed, we have to return a message.
-     * If all data are done, we have to do the job, and return a message.
+     * Si les données ne sont pas fournies, nous levons une exception.
+     * Sinon, le fichier est crée, et nous écrivons un message de réussite.
+     * @param symptoms Map des symptoms et de leur quantité classés par ordre alphabétique
+     * @throws IOException Erreur d'écriture.
      */
 
     void writeSymptoms(Map<String, Integer> symptoms) throws IOException;

@@ -10,22 +10,29 @@ import java.util.Map;
  *  {symptom2} : {quantity}
  *  {symptom3} : {quantity}
  *
- * @return void
- * @exception IllegalArgumentException if symptom is null
- * @exception IOException if impossibility to create file
- *
  */
 public class WriteSymptomDataToFile implements ISymptomWriter {
 
     private final String outputFile;
 
+    /**
+     * Récupère le chemin et le nom du fichier ed sortie
+     * @param outputFile Chemin et nom du fichier de sortie
+     */
+
     public WriteSymptomDataToFile(String outputFile) {
         this.outputFile = outputFile;
     }
 
+    /**
+     * Ecrit le fichier de sortie
+     * @param symptoms Map des symptoms et de leur quantité classés par ordre alphabétique
+     * @throws IOException "Une erreur est survenue lors de l'écriture du fichier : " + e
+     */
     @Override
     public void writeSymptoms(Map<String, Integer> symptoms) throws IOException {
         if (symptoms == null) {
+
             throw new IllegalArgumentException("Enable to proccess array symptoms : " + symptoms);
         }
 
