@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Read file and return a List, one value by line *
+ * Lit un fichier d'entrée et retourne une {@code List<String>}, une valeur par ligne
  */
 public class ReadSymptomDataFromFile implements ISymptomReader {
 

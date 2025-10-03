@@ -5,10 +5,10 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * Take the collection (TreeMap) and write in result/symptoms.out the result with this format :
- *  {symptom1} : {quantity}
- *  {symptom2} : {quantity}
- *  {symptom3} : {quantity}
+ * Prend une collection {@code TreeMap} et écris le résultat dans le fichier de sortie sous ce format :
+ *  {symptom1} : {quantité}
+ *  {symptom2} : {quantité}
+ *  {symptom3} : {quantité}
  *
  */
 public class WriteSymptomDataToFile implements ISymptomWriter {
