@@ -37,9 +37,11 @@ public class WriteSymptomDataToFile implements ISymptomWriter {
         }
 
         try (FileWriter writer = new FileWriter(outputFile)){
+            writer.write("-- Liste des symptômes recensés, ainsi que leurs occurrences --\n\n");
             for (String symptom : symptoms.keySet()) {
                 writer.write(symptom + " : " + symptoms.get(symptom) + "\n");
             }
+            writer.write("\n--------------------------------------------------------------- \n");
             System.out.println("Ecriture du fichier : OK");
         } catch (IOException e) {
             throw new IOException("Une erreur est survenue lors de l'écriture du fichier : " + e);
