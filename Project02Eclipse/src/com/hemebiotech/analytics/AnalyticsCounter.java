@@ -1,5 +1,6 @@
 package com.hemebiotech.analytics;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -22,13 +23,22 @@ public class AnalyticsCounter {
         this.writer = writer;
     }
 
-    /**
-     * Récupère les données de reader sous forme d'un array, les traite, et les envoie sous forme d'un TreeMap à writer.
-     * @throws Exception "Une erreur est survenue lors de l'analyse des données : " + e
-     */
-    public void analyseData() throws Exception {
 
-        List<String> symptoms = reader.getSymptoms();
+    /**
+     * Retourne la liste des symptômes issue de la class ReadSymptomDataFromFile sous forme de {@code List<String>}
+     * @return reader.getSymtoms()
+     */
+    public List<String> getSymptoms() {
+        return reader.getSymptoms();
+    }
+
+    /**
+     * Compte et trie par ordre alphabétique les symptômes.
+     * @return TreeMap des symptômes, avec le nom du symptôme en clé et son occurrence en valeur.
+     * @throws Exception si analyse impossible
+     * @param symptoms liste des symptômes.
+     */
+    public Map<String, Integer> countAndSort(List<String> symptoms) throws Exception{
         Map<String, Integer> symptomsMap = new TreeMap<>();
         try {
             for (String symptom : symptoms) {
@@ -36,10 +46,18 @@ public class AnalyticsCounter {
             }
 
             System.out.println("Tri des données reçue après lecture : OK");
+            return symptomsMap;
         } catch(Exception e) {
             throw new Exception("Une erreur est survenue lors de l'analyse des données : " + e);
-        } finally {
-            writer.writeSymptoms(symptomsMap);
         }
+    }
+
+    /**
+     * Ecrit l'outputFile des symptomes et occurence.
+     * @param symptomsMap qui est un TreeMap des symptômes (clé) et de leur occurrence (valeur).
+     * @throws IOException Si erreur dans l'écriture du outputFile.
+     */
+    public void writeSymptoms(Map<String, Integer> symptomsMap) throws IOException {
+        writer.writeSymptoms(symptomsMap);
     }
 }

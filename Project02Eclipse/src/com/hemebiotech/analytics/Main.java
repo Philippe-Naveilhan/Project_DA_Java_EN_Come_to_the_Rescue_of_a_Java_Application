@@ -1,5 +1,8 @@
 package com.hemebiotech.analytics;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * Programme pour l'analyse de liste de symptômes.
  * Prend en entrée un fichier texte (.txt), compte chaque symptôme, les trie par ordre alphabétique et écrit les résultat dans un fichier de sortie.
@@ -20,9 +23,11 @@ public class Main {
             ReadSymptomDataFromFile reader = new ReadSymptomDataFromFile("symptoms.txt");
             WriteSymptomDataToFile writer = new WriteSymptomDataToFile("result/symptoms.out");
 
-            AnalyticsCounter analyse = new AnalyticsCounter(reader, writer);
+            AnalyticsCounter analyticsCounter = new AnalyticsCounter(reader, writer);
 
-            analyse.analyseData();
+            List<String> symptoms = analyticsCounter.getSymptoms();
+            Map<String, Integer> sortedSymptoms = analyticsCounter.countAndSort(symptoms);
+            analyticsCounter.writeSymptoms(sortedSymptoms);
 
         } catch (Exception e) {
             System.out.println("Error(s) : \n\t" + e);
